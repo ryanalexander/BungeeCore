@@ -1,0 +1,3 @@
+lobbies:
+  - hub01
+kick_message: "&cLobby> &7The server &a%s&7 has gone down. You have been sent to &a%s"

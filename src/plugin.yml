@@ -1,0 +1,5 @@
+name: server
+main: gg.stelch.core.Main
+version: cmd_core:1.14
+description: Stelch core
+author: Aspire
