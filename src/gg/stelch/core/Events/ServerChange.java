@@ -17,7 +17,7 @@ public class ServerChange implements Listener {
             if (p.getParty() == null)
                 return;
             Party party = p.getParty();
-            p.execute("partydata " + ((party.getLeader() != p) ? "join" : "leader") + " " + party.getLeader().getPlayer().getUniqueId());
+            p.execute("partydata " + ((party.getLeader() != p) ? "join" : "leader") + " " + party.getLeader().getPlayer());
             for (PartyPlayer pm : party.getMembers()) {
                 if (pm.getServer().equals(p.getServer()))
                     continue;

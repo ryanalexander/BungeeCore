@@ -13,8 +13,7 @@ public class SQL
         try
         {
             Class.forName("com.mysql.jdbc.Driver");
-            System.out.println("Connected to SQL Database.");
-            this.connection = DriverManager.getConnection("jdbc:mysql://" + host + ":" + (port > 0 ? port : 3306) + "/" + database, username, password);
+            this.connection = DriverManager.getConnection("jdbc:mysql://" + host + ":" + (port > 0 ? port : 3306) + "/" + database+"?autoReconnect=true&useSSL=false", username, password);
         }
         catch (Exception e)
         {

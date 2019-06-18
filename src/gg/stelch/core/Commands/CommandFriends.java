@@ -1,5 +1,6 @@
 package gg.stelch.core.Commands;
 
+import gg.stelch.core.Commands.FriendsCommands.add;
 import gg.stelch.core.Commands.FriendsCommands.help;
 import gg.stelch.core.Commands.FriendsCommands.list;
 import gg.stelch.core.Util.Text;
@@ -21,6 +22,9 @@ public class CommandFriends extends Command {
             switch(args[0].toLowerCase()){
                 case "help":
                     help.get((ProxiedPlayer)sender,args);
+                    break;
+                case "add":
+                    add.get((ProxiedPlayer)sender,args);
                     break;
                 case "list":
                     try {

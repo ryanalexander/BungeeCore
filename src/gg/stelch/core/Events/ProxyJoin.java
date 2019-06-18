@@ -12,7 +12,7 @@ public class ProxyJoin implements Listener {
     public void ProxyJoin(ServerConnectedEvent e){
         GamePlayer player;
         if(!(Main.players.containsKey(e.getPlayer()))){
-            player = new GamePlayer(e.getPlayer().getUniqueId().toString());
+            player = new GamePlayer(e.getPlayer().getUniqueId());
             Main.players.put(e.getPlayer(),player);
         }else {
             player=Main.players.get(e.getPlayer());

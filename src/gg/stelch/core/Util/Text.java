@@ -8,7 +8,7 @@ public class Text {
 
   public static BaseComponent[] build(String text, String hover) { return (new ComponentBuilder("").appendLegacy(text.replaceAll("&","§")).event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, (new ComponentBuilder(hover)).create())).create()); }
 
-  public static BaseComponent[] build(String text, String hover, String command, ClickEvent.Action action) { return (new ComponentBuilder("").appendLegacy(text.replaceAll("&","§"))).event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, (new ComponentBuilder(hover)).create())).event(new ClickEvent(action, command)).create(); }
+  public static BaseComponent[] build(String text, String hover, String command, ClickEvent.Action action) { return (new ComponentBuilder("").event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, (new ComponentBuilder(hover)).create())).event(new ClickEvent(action, command)).appendLegacy(text.replaceAll("&","§"))).create(); }
 
   public static String format(String str) { return (str).replaceAll("&","§"); }
   
