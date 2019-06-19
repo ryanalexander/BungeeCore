@@ -1,5 +1,6 @@
 package gg.stelch.core.PlayerUtil;
 
+import gg.stelch.core.Main;
 import gg.stelch.core.Util.SQL;
 import gg.stelch.core.Util.Text;
 import gg.stelch.core.Varables.PrivacySetting;
@@ -138,11 +139,45 @@ public class GamePlayer {
         this.uuid = uuid;
     }
 
+    public boolean hasPendingRequest(GamePlayer player) {
+        SQL sql = new SQL("35.192.213.70",3306,"root","Garcia#02","games");
+        ResultSet data = sql.query(String.format("SELECT * FROM `relationships` WHERE `target`='%s' AND `player`='%s' AND `state`='0';",this.uuid,player.uuid));
+        try {
+            while(data.next()){
+                sql.close();
+                return true;
+            }
+        }catch (Exception e){
+            sql.close();
+            return false;
+        }
+        sql.close();
+        return false;
+    }
+
+    public void doAcceptRequest(GamePlayer player){
+        SQL sql = new SQL("35.192.213.70",3306,"root","Garcia#02","games");
+        sql.query(String.format("UPDATE `relationships` SET `active`='1' WHERE `player`='%s' AND `target`='%s';",player.uuid,this.uuid),true);
+        sql.query(String.format("INSERT INTO `relationships` (`player`,`target`,`state`) WHERE ('%s','%s','%s')",this.uuid,player.uuid,1),true);
+    }
+
     @Override
     public boolean equals(Object obj) {
         return super.equals(obj);
     }
 
     public boolean isonline() {return ((player!=null)&&player.isConnected());}
+
+    public static GamePlayer getGamePlayer(String player){
+        ProxiedPlayer target = ProxyServer.getInstance().getPlayer(player);
+        GamePlayer gamePlayer;
+        if(Main.players.containsKey(target)){
+            gamePlayer=Main.players.get(target);
+        }else {
+            gamePlayer=new GamePlayer(player);
+        }
+        return gamePlayer;
+
+    }
 
 }

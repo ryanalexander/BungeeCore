@@ -17,12 +17,9 @@ public class add {
     public static void get(ProxiedPlayer player, String[] args){
 
         ProxiedPlayer target = ProxyServer.getInstance().getPlayer(args[1]);
-        GamePlayer gamePlayer;
-        if(Main.players.containsKey(target)){
-            gamePlayer=Main.players.get(target);
-        }else {
-            gamePlayer=new GamePlayer(args[1]);
-        }
+
+        GamePlayer gamePlayer = GamePlayer.getGamePlayer(args[1]);
+
 
         if(!gamePlayer.isStored()){player.sendMessage(Text.build("&aFriends> "+en.general_player_offline));return;}
 

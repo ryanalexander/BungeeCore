@@ -1,5 +1,6 @@
 package gg.stelch.core.Commands;
 
+import gg.stelch.core.Commands.FriendsCommands.accept;
 import gg.stelch.core.Commands.FriendsCommands.add;
 import gg.stelch.core.Commands.FriendsCommands.help;
 import gg.stelch.core.Commands.FriendsCommands.list;
@@ -25,6 +26,9 @@ public class CommandFriends extends Command {
                     break;
                 case "add":
                     add.get((ProxiedPlayer)sender,args);
+                    break;
+                case "accept":
+                    accept.get((ProxiedPlayer)sender,args);
                     break;
                 case "list":
                     try {
