@@ -139,9 +139,27 @@ public class GamePlayer {
         this.uuid = uuid;
     }
 
+    public ProxiedPlayer legacy() {return this.player;}
+
     public boolean hasPendingRequest(GamePlayer player) {
         SQL sql = new SQL("35.192.213.70",3306,"root","Garcia#02","games");
         ResultSet data = sql.query(String.format("SELECT * FROM `relationships` WHERE `target`='%s' AND `player`='%s' AND `state`='0';",this.uuid,player.uuid));
+        try {
+            while(data.next()){
+                sql.close();
+                return true;
+            }
+        }catch (Exception e){
+            sql.close();
+            return false;
+        }
+        sql.close();
+        return false;
+    }
+
+    public boolean isFriends(GamePlayer player){
+        SQL sql = new SQL("35.192.213.70",3306,"root","Garcia#02","games");
+        ResultSet data = sql.query(String.format("SELECT * FROM `relationships` WHERE `player`='%s' AND `target`='%s' AND `state`='1';",this.uuid,player.uuid));
         try {
             while(data.next()){
                 sql.close();

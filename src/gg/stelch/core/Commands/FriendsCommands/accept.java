@@ -21,12 +21,15 @@ public class accept {
         }
 
         if(gamePlayer1.hasPendingRequest(gamePlayer)){
-            player.sendMessage("Request has been accepted");
+            gamePlayer1.legacy().sendMessage(Text.build(String.format("&aFriends> &7You are now friends with &e%s&7!",gamePlayer.getRank().getColor()+gamePlayer.getUsername())));
+            gamePlayer.legacy().sendMessage(Text.build(String.format("&aFriends> &e%s&7 has accepted your friend request!",gamePlayer1.getRank().getColor()+gamePlayer1.getUsername())));
         }else {
-            player.sendMessage("No pending requests from this user.");
+            player.sendMessage(Text.build("&aFriends> &7You have no pending friend requests from this user."));
+            return;
         }
 
         SQL sql = new SQL("35.192.213.70", 3306, "root", "Garcia#02", "games");
-        sql.query(String.format("INSERT INTO `relationships` (`player`,`target`,`state`) VALUES ('%s','%s','0')", player.getUniqueId(), gamePlayer.getUuid()), true);
+        sql.query(String.format("UPDATE `relationships` SET `state`='1' WHERE `player`='%s' AND `target`='%s';", gamePlayer.getUuid(), gamePlayer1.getUuid()), true);
+        sql.query(String.format("INSERT INTO `relationships` (`player`,`target`,`state`) VALUES ('%s','%s','1')", gamePlayer1.getUuid(), gamePlayer.getUuid()), true);
     }
 }

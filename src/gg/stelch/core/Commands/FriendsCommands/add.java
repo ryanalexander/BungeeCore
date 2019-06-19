@@ -18,17 +18,23 @@ public class add {
 
         ProxiedPlayer target = ProxyServer.getInstance().getPlayer(args[1]);
 
+        GamePlayer target_player = GamePlayer.getGamePlayer(target.getName());
+
         GamePlayer gamePlayer = GamePlayer.getGamePlayer(args[1]);
 
 
         if(!gamePlayer.isStored()){player.sendMessage(Text.build("&aFriends> "+en.general_player_offline));return;}
 
+        if(gamePlayer.hasPendingRequest(target_player)){player.sendMessage(Text.build("&aFriends> &7You already have a pending friend request for that user."));}
+
+        if(target_player.isFriends(gamePlayer)){player.sendMessage(Text.build("&aFriends> &7You are already friends with that user."));return;}
+
         if(gamePlayer.isonline()){
             target.sendMessage(Text.build(String.format("&aFriends> &7You have a new friend request from &e%s\n\n",player.getName())));
-            target.sendMessage(new ComponentBuilder("ACCEPT").color(ChatColor.GREEN).event(
+            target.sendMessage(new ComponentBuilder("    ").reset().append("ACCEPT").color(ChatColor.GREEN).event(
                     new HoverEvent(HoverEvent.Action.SHOW_TEXT,
                             new ComponentBuilder(Text.format("&aClick to accept.")).create())
-            ).event(new ClickEvent(ClickEvent.Action.RUN_COMMAND,"/friend accept "+player.getName())).reset().append("     ")
+            ).event(new ClickEvent(ClickEvent.Action.RUN_COMMAND,"/friend accept "+player.getName())).append("     ").reset()
                     .append("DECLINE").color(ChatColor.RED).event(
                             new HoverEvent(HoverEvent.Action.SHOW_TEXT,
                                     new ComponentBuilder(Text.format("&cClick to deny.")).create())
