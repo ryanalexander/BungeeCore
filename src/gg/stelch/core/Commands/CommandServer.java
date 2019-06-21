@@ -1,6 +1,6 @@
 package gg.stelch.core.Commands;
 
-import gg.stelch.core.Util.Text;
+import com.stelch.games2.core.Utils.Text;
 import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.chat.ComponentBuilder;

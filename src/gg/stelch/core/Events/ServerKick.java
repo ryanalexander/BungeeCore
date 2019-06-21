@@ -1,6 +1,6 @@
 package gg.stelch.core.Events;
 
-import gg.stelch.core.Util.Text;
+import com.stelch.games2.core.Utils.Text;
 import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.config.ServerInfo;
 import net.md_5.bungee.api.event.ServerKickEvent;
@@ -15,6 +15,6 @@ public class ServerKick implements Listener {
         e.setCancelled(true);
         ServerInfo server = ProxyServer.getInstance().getServers().get("hub01");
         e.setCancelServer(server);
-        e.getPlayer().sendMessage(Text.format("&aPortal> &7Returned to lobby as you were kicked."));
+        e.getPlayer().sendMessage(Text.build("&aPortal> &7Returned to lobby as you were kicked."));
     }
 }

@@ -1,6 +1,6 @@
 package gg.stelch.core.Commands.FriendsCommands;
 
-import gg.stelch.core.Util.Text;
+import com.stelch.games2.core.Utils.Text;
 import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.connection.ProxiedPlayer;

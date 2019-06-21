@@ -3,7 +3,7 @@ package gg.stelch.core.Commands.PartyCommands;
 import gg.stelch.core.Party;
 import gg.stelch.core.PartyUtil.PartyManager;
 import gg.stelch.core.PartyUtil.PartyPlayer;
-import gg.stelch.core.Util.Text;
+import com.stelch.games2.core.Utils.Text;
 import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 

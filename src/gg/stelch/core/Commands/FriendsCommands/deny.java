@@ -1,8 +1,8 @@
 package gg.stelch.core.Commands.FriendsCommands;
 
-import gg.stelch.core.PlayerUtil.GamePlayer;
-import gg.stelch.core.Util.SQL;
-import gg.stelch.core.Util.Text;
+import com.stelch.games2.core.PlayerUtils.ProxyGamePlayer;
+import com.stelch.games2.core.Utils.SQL;
+import com.stelch.games2.core.Utils.Text;
 import gg.stelch.core.Util.en;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 
@@ -10,8 +10,8 @@ public class deny {
 
         public static void get(ProxiedPlayer player, String[] args) {
 
-            GamePlayer gamePlayer = GamePlayer.getGamePlayer(args[1]);
-            GamePlayer gamePlayer1 = GamePlayer.getGamePlayer(player.getName());
+            ProxyGamePlayer gamePlayer = ProxyGamePlayer.getProxyGamePlayer(args[1]);
+            ProxyGamePlayer gamePlayer1 = ProxyGamePlayer.getProxyGamePlayer(player.getName());
 
             if (!gamePlayer.isStored()) {
                 player.sendMessage(Text.build("&aFriends> " + en.general_player_offline));

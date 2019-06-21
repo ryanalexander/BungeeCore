@@ -1,8 +1,8 @@
 package gg.stelch.core.PartyUtil;
 
+import com.stelch.games2.core.PlayerUtils.ProxyGamePlayer;
 import gg.stelch.core.Party;
-import gg.stelch.core.PlayerUtil.GamePlayer;
-import gg.stelch.core.Util.Text;
+import com.stelch.games2.core.Utils.Text;
 import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.config.ServerInfo;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
@@ -14,7 +14,7 @@ public class PartyPlayer {
         PRIVATE, FRIENDS, PUBLIC;
     }
 
-    GamePlayer gamePlayer;
+    ProxyGamePlayer gamePlayer;
 
     PartyPrivacy privacy = PartyPrivacy.PUBLIC;
 
@@ -48,11 +48,11 @@ public class PartyPlayer {
 
     public ProxiedPlayer getPlayer() { return this.player; }
 
-    public GamePlayer getGamePlayer() {
+    public ProxyGamePlayer getGamePlayer() {
         return gamePlayer;
     }
 
-    public void setGamePlayer(GamePlayer gamePlayer) {
+    public void setGamePlayer(ProxyGamePlayer gamePlayer) {
         this.gamePlayer = gamePlayer;
     }
 

@@ -5,15 +5,9 @@ import gg.stelch.core.Commands.CommandFriends;
 import gg.stelch.core.Commands.CommandParty;
 import gg.stelch.core.Commands.CommandServer;
 import gg.stelch.core.Events.*;
-import gg.stelch.core.PlayerUtil.GamePlayer;
-import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.plugin.Plugin;
 
-import java.util.HashMap;
-
 public class Main extends Plugin {
-
-    public static HashMap<ProxiedPlayer, GamePlayer> players = new HashMap<>();
 
     public void onEnable() {
 
@@ -23,8 +17,6 @@ public class Main extends Plugin {
         getProxy().getPluginManager().registerCommand(this, new CommandFriends());
 
         getProxy().getPluginManager().registerListener(this,new ProxyPing());
-        getProxy().getPluginManager().registerListener(this,new ProxyJoin());
-        getProxy().getPluginManager().registerListener(this,new ProxyLeave());
         getProxy().getPluginManager().registerListener(this,new ServerKick());
         getProxy().getPluginManager().registerListener(this,new ServerChange());
 

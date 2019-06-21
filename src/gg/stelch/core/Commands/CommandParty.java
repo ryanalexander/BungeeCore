@@ -1,8 +1,8 @@
 package gg.stelch.core.Commands;
 
+import com.stelch.games2.core.Utils.Text;
 import gg.stelch.core.Commands.PartyCommands.*;
 import gg.stelch.core.PartyUtil.PartyManager;
-import gg.stelch.core.Util.Text;
 import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.config.ServerInfo;

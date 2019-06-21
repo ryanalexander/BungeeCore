@@ -1,6 +1,7 @@
 package gg.stelch.core.Events;
 
-import gg.stelch.core.Util.Text;
+
+import com.stelch.games2.core.Utils.Text;
 import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.ServerPing;
 import net.md_5.bungee.api.event.ProxyPingEvent;
@@ -12,7 +13,7 @@ public class ProxyPing implements Listener {
     @EventHandler
     public void onPing(ProxyPingEvent e){
         ServerPing serverPing = e.getResponse();
-        serverPing.setDescription(Text.format("&aStelch Games &c[testing]"));
+        serverPing.setDescriptionComponent(Text.build("&aStelch Games &c[testing]")[0]);
         serverPing.getPlayers().setMax(ProxyServer.getInstance().getOnlineCount()+1);
         e.setResponse(serverPing);
     }

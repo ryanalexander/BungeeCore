@@ -1,8 +1,8 @@
 package gg.stelch.core.PartyUtil;
 
 
+import com.stelch.games2.core.Utils.Text;
 import gg.stelch.core.Party;
-import gg.stelch.core.Util.Text;
 import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.connection.ProxiedPlayer;

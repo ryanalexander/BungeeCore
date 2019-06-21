@@ -1,9 +1,9 @@
 package gg.stelch.core.Commands.FriendsCommands;
 
+import com.stelch.games2.core.PlayerUtils.ProxyGamePlayer;
+import com.stelch.games2.core.Utils.SQL;
 import gg.stelch.core.Main;
-import gg.stelch.core.PlayerUtil.GamePlayer;
-import gg.stelch.core.Util.SQL;
-import gg.stelch.core.Util.Text;
+import com.stelch.games2.core.Utils.Text;
 import gg.stelch.core.Util.en;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.ProxyServer;
@@ -18,9 +18,9 @@ public class add {
 
         ProxiedPlayer target = ProxyServer.getInstance().getPlayer(args[1]);
 
-        GamePlayer target_player = GamePlayer.getGamePlayer(target.getName());
+        ProxyGamePlayer target_player = ProxyGamePlayer.getProxyGamePlayer(target.getName());
 
-        GamePlayer gamePlayer = GamePlayer.getGamePlayer(args[1]);
+        ProxyGamePlayer gamePlayer = ProxyGamePlayer.getProxyGamePlayer(args[1]);
 
 
         if(!gamePlayer.isStored()){player.sendMessage(Text.build("&aFriends> "+en.general_player_offline));return;}

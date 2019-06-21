@@ -1,7 +1,7 @@
 package gg.stelch.core.Commands;
 
+import com.stelch.games2.core.Utils.Text;
 import gg.stelch.core.Commands.FriendsCommands.*;
-import gg.stelch.core.Util.Text;
 import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.plugin.Command;

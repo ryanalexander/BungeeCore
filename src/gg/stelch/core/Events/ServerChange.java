@@ -11,7 +11,6 @@ import net.md_5.bungee.event.EventHandler;
 public class ServerChange implements Listener {
     @EventHandler
     public void ServerChange(ServerSwitchEvent e) {
-        Main.players.get(e.getPlayer()).setServer(e.getPlayer().getServer().getInfo());
         if (PartyManager.players.containsKey(e.getPlayer())) {
             PartyPlayer p = (PartyPlayer) PartyManager.players.get(e.getPlayer());
             if (p.getParty() == null)

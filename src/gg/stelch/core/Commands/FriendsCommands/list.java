@@ -1,10 +1,10 @@
 package gg.stelch.core.Commands.FriendsCommands;
 
+import com.stelch.games2.core.PlayerUtils.ProxyGamePlayer;
+import com.stelch.games2.core.PlayerUtils.ranks;
+import com.stelch.games2.core.Utils.SQL;
 import gg.stelch.core.Main;
-import gg.stelch.core.PlayerUtil.GamePlayer;
-import gg.stelch.core.Util.SQL;
-import gg.stelch.core.Util.Text;
-import gg.stelch.core.Varables.ranks;
+import com.stelch.games2.core.Utils.Text;
 import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
@@ -24,15 +24,15 @@ public class list {
         int friends = 0;
         while(results.next()){
             friends++;
-            GamePlayer target;
+            ProxyGamePlayer target;
             UUID target_uuid=UUID.fromString(results.getString("target"));
-            if(Main.players.containsKey(ProxyServer.getInstance().getPlayer(target_uuid))){
-                target=Main.players.get(ProxyServer.getInstance().getPlayer(target_uuid));
+            if(ProxyGamePlayer.players.containsKey(ProxyServer.getInstance().getPlayer(target_uuid))){
+                target=ProxyGamePlayer.players.get(ProxyServer.getInstance().getPlayer(target_uuid));
             }else {
-                target=new GamePlayer(results.getString("target"));
+                target=new ProxyGamePlayer(results.getString("target"));
             }
             if(target.isonline()){
-                bc.append(Text.build("&a"+ranks.valueOf(target.getRank().toString()).getColor()+target.getUsername()+"&r","Click to message","/msg "+target.getUsername()+" ", ClickEvent.Action.SUGGEST_COMMAND));
+                bc.append(Text.build("&a"+ ranks.valueOf(target.getRank().toString()).getColor()+target.getUsername()+"&r","Click to message","/msg "+target.getUsername()+" ", ClickEvent.Action.SUGGEST_COMMAND));
                 bc.append(Text.build(", "));
             }else {
                 bc.append(Text.build("&7"+ target.getUsername()+"&r",Text.format("&cUser is offline")));
