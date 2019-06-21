@@ -35,7 +35,7 @@ public class list {
                 bc.append(Text.build("&a"+ranks.valueOf(target.getRank().toString()).getColor()+target.getUsername()+"&r","Click to message","/msg "+target.getUsername()+" ", ClickEvent.Action.SUGGEST_COMMAND));
                 bc.append(Text.build(", "));
             }else {
-                bc.append(Text.build("&7"+ ranks.valueOf(target.getRank().toString()).getColor()+target.getUsername()+"&r",Text.format("&cUser is offline")));
+                bc.append(Text.build("&7"+ target.getUsername()+"&r",Text.format("&cUser is offline")));
                 bc.append(Text.build(", "));
             }
         }
