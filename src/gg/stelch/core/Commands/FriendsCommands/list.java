@@ -26,11 +26,7 @@ public class list {
             friends++;
             ProxyGamePlayer target;
             UUID target_uuid=UUID.fromString(results.getString("target"));
-            if(ProxyGamePlayer.players.containsKey(ProxyServer.getInstance().getPlayer(target_uuid))){
-                target=ProxyGamePlayer.players.get(ProxyServer.getInstance().getPlayer(target_uuid));
-            }else {
-                target=new ProxyGamePlayer(results.getString("target"));
-            }
+            target=ProxyGamePlayer.getProxyGamePlayer(target_uuid);
             if(target.isonline()){
                 bc.append(Text.build("&a"+ ranks.valueOf(target.getRank().toString()).getColor()+target.getUsername()+"&r","Click to message","/msg "+target.getUsername()+" ", ClickEvent.Action.SUGGEST_COMMAND));
                 bc.append(Text.build(", "));

@@ -15,6 +15,11 @@ public class ServerKick implements Listener {
         e.setCancelled(true);
         ServerInfo server = ProxyServer.getInstance().getServers().get("hub01");
         e.setCancelServer(server);
-        e.getPlayer().sendMessage(Text.build("&aPortal> &7Returned to lobby as you were kicked."));
+        if(e.getKickReason().startsWith("[GAMESTATE]")){
+            e.getPlayer().sendMessage(Text.build(String.format("&aPortal> &7Returned to &e%s&7 as your last game finished.",server.getName())));
+        }else {
+            e.getPlayer().sendMessage(e.getKickReasonComponent());
+            e.getPlayer().sendMessage(Text.build("&aPortal> &7Returned to lobby as you were kicked."));
+        }
     }
 }
