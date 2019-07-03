@@ -16,7 +16,6 @@ public class Main extends Plugin {
         getProxy().getPluginManager().registerCommand(this, new CommandParty());
         getProxy().getPluginManager().registerCommand(this, new CommandFriends());
 
-        getProxy().getPluginManager().registerListener(this,new ProxyPing());
         getProxy().getPluginManager().registerListener(this,new ServerKick());
         getProxy().getPluginManager().registerListener(this,new ServerChange());
 
