@@ -1,66 +1,51 @@
-/*
- *
- * *
- *  *
- *  * © Stelch Games 2019, distribution is strictly prohibited
- *  *
- *  * Changes to this file must be documented on push.
- *  * Unauthorised changes to this file are prohibited.
- *  *
- *  * @author Ryan Wood
- *  * @since 14/7/2019
- *
- */
-
 package gg.stelch.core.Commands.FriendsCommands;
 
-import com.stelch.games2.core.BungeeCore;
 import com.stelch.games2.core.PlayerUtils.ProxyGamePlayer;
-import com.stelch.games2.core.PlayerUtils.ranks;
 import com.stelch.games2.core.Utils.SQL;
-import gg.stelch.core.Main;
 import com.stelch.games2.core.Utils.Text;
+import gg.stelch.core.Main;
 import net.md_5.bungee.api.ProxyServer;
+import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
-import redis.clients.jedis.Jedis;
 
+import java.sql.Array;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Set;
+import java.util.ArrayList;
 import java.util.UUID;
 
 public class list {
 
     public static void get(ProxiedPlayer p, String[] args) throws SQLException {
+        SQL sql = new SQL("35.192.213.70",3306,"root","Garcia#02","games");
 
-        try (Jedis jedis = BungeeCore.pool.getResource()){
-            Set<String> friends = jedis.smembers(String.format("PLAYER|%s|relationships",p.getUniqueId()));
-            ComponentBuilder bc = new ComponentBuilder("");
-            int count = 0;
-            for(String s : friends){
-                count++;
-                ProxyGamePlayer target;
-                UUID target_uuid=UUID.fromString(s);
-                target=ProxyGamePlayer.getProxyGamePlayer(target_uuid);
-                if(target.isonline()){
-                    bc.append(Text.build("&a"+ ranks.valueOf(target.getRank().toString()).getColor()+target.getUsername()+"&r","Click to message","/msg "+target.getUsername()+" ", ClickEvent.Action.SUGGEST_COMMAND));
-                    bc.append(Text.build(", "));
-                }else {
-                    bc.append(Text.build("&7"+ target.getUsername()+"&r",Text.format("&cUser is offline")));
-                    bc.append(Text.build(", "));
-                }
-            }
-            if(count==0){
-                p.sendMessage(Text.build("&aFriends> &7You do not have any friends. Try &e/friends add&7!"));
+        ResultSet results = sql.query(String.format("SELECT * FROM `relationships` WHERE `player` = '%s'",p.getUniqueId()));
+        ComponentBuilder bc = new ComponentBuilder("");
+        int friends = 0;
+        while(results.next()){
+            friends++;
+            ProxyGamePlayer target;
+            UUID target_uuid=UUID.fromString(results.getString("target"));
+            if(ProxyGamePlayer.players.containsKey(ProxyServer.getInstance().getPlayer(target_uuid))){
+                target=ProxyGamePlayer.players.get(ProxyServer.getInstance().getPlayer(target_uuid));
             }else {
-                String header = "&6-----------------------------------------------------\n\n&aFriend List\n";
-                p.sendMessage(Text.build(header));
-                p.sendMessage(Text.build(String.format("&aFriends (%s):",count)));
-                p.sendMessage(bc.create());
-                p.sendMessage(Text.build("&6-----------------------------------------------------"));
+                target=new ProxyGamePlayer(results.getString("target"));
+            }
+            if(target.isonline()){
+                bc.append(Text.build("&a"+target.getUsername()+"&r","Click to message","/msg "+target.getUsername()+" ", ClickEvent.Action.SUGGEST_COMMAND));
+                bc.append(Text.build(", "));
+            }else {
+                bc.append(Text.build("&7"+target.getUsername()+"&r"));
+                bc.append(Text.build(", "));
             }
         }
+
+        String header = "&6-----------------------------------------------------\n\n&aFriend List\n";
+        p.sendMessage(Text.build(header));
+        p.sendMessage(Text.build(String.format("&aFriends (%s):",friends)));
+        p.sendMessage(bc.create());
+        p.sendMessage(Text.build("&6-----------------------------------------------------"));
     }
 }

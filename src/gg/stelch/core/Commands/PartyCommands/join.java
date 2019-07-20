@@ -27,7 +27,7 @@ public class join {
             p.sendMessage(Text.build(gg.stelch.core.Util.en.party_join_usage));
             return;
         }
-        if (!Text.isNumeric(args[1]) || !PartyManager.invites.containsKey(Integer.valueOf(Integer.parseInt(args[1])))) {
+        if (!PartyManager.invites.containsKey(Integer.valueOf(Integer.parseInt(args[1])))) {
             p.sendMessage(Text.build(gg.stelch.core.Util.en.party_join_invalid_player));
             return;
         }
